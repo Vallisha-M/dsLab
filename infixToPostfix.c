@@ -37,20 +37,6 @@ int main()
     printf("enter Infix expression");
     scanf("%s",infix);
     int l = strlen(infix);
-    
-    //Parentheses Matching
-    int o=0, c=0;
-    for(i=0;i<l;i++)
-    {
-        if(infix[i] == '(') o++;
-        if(infix[i] == ')') c++;
-    }
-    if(o!=c)
-    {
-        printf("Parentheses mismatch");
-        exit(0);
-    }
-    //////
     push('#');
     while((ch=infix[i++])!='\0' )
     {
