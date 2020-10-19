@@ -11,7 +11,7 @@ int queue[size];
 void enqueue(int input)
 {
     if((front==0&&rear==size-1)||(rear==front-1))
-        printf("\n\Queue is full\n\n");
+        printf("\n\nQueue is full\n\n");
     else
     {
         if(front==-1&&rear==-1)
