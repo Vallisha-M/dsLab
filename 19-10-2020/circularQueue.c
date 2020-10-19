@@ -61,24 +61,24 @@ void display()
 }
 int main()
 {
-    int c, x;
+    int choice, input;
     while(1)
     {
-        c = 0;
+        choice = 0;
         printf("Enter 1 to enqueue\n");
         printf("Enter 2 to dequeue\n");
         printf("Enter 3 to display\n");
         printf("Enter -1 to quit\n");
         printf("Enter your choice : ");
-        scanf("%d", &c);
-        if(c==-1)
+        scanf("%d", &choice);
+        if(choice==-1)
             break;
-        switch(c)
+        switch(choice)
         {
             case 1:
                 printf("\n\nEnter the element to be enqueued : ");
-                scanf("%d", &x);
-                enqueue(x);
+                scanf("%d", &input);
+                enqueue(input);
                 break;
             case 2:
                 dequeue();
