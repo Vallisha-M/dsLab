@@ -1,6 +1,10 @@
 #include <stdio.h>
 #define size 4
 
+void enqueue(int);
+void dequeue();
+void display();
+
 int front=-1, rear=-1;
 int queue[size];
 
