@@ -54,12 +54,12 @@ void display()
     if(front<=rear)
     {
         for(i = front; i<=rear; i++)
-            printf("%d", queue[i]);
+            printf("%d ", queue[i]);
     }
     else
     {
         for(i = front; i<= rear; i = (i+1)%size)
-            printf("%d", queue[i]);
+            printf("%d ", queue[i]);
     }
     printf("\n\n");
 }
