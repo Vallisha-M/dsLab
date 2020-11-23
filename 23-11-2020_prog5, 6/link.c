@@ -13,6 +13,7 @@ void putBeg(int value)
     ptr -> value = value;
     if(head==NULL){
         head = ptr;
+        head->next=NULL;
         return;
     }
     ptr->next = head;
@@ -43,7 +44,7 @@ void put(int pos, int value)
         printf("\n\nERROR\nEnter Correct Index\n\n");
         return;
     }
-    if((tmp->next)->next==NULL)
+    if((tmp->next)==NULL)
     {
         putEnd(value);
         free(ptr);
@@ -57,6 +58,7 @@ void putEnd(int value) {
 
     node* ptr = (node*) malloc((sizeof(node)));
     ptr -> value = value;
+    ptr->next=NULL;
     if(head==NULL)
     {
         head=ptr;
@@ -164,6 +166,7 @@ void main() {
         printf("Enter 5 to delete last element\n");
         printf("Enter 6 to delete element at given index\n");
         printf("Enter 7 to display\n");
+        printf("Enter -1 to quit\n");
         printf("Enter your choice : ");
         scanf("%d", &choice);
         if(choice==-1)
@@ -200,8 +203,6 @@ void main() {
                 printf("\n\nIncorrect Choice\n\n");
                 break;
         }
-        printf("\n\n-----DONE-----");
-
     }
-
+    printf("\n\n-----DONE-----\n\n");
 }
