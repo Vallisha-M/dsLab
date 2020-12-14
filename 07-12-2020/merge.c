@@ -9,7 +9,7 @@ void add_beg(int, node**);
 node* head3 = NULL;
 node* head1 = NULL;
 node* head2 = NULL;
-
+node* head4 = NULL;
 void del_beg(node** head) {
     if(*head==NULL){
         printf("\n\nLinked List is Empty\n\n");
@@ -153,19 +153,17 @@ void merge(node* curr1, node* curr2, node* prev) {
         sort(head2);
         head3 = newNode;
     }
-    int flag2 = 1, flag4 = 1;
+    int flag2 = 1;
     if(!flag1 && !flag3){
         flag2 = curr1->value >= curr2->value;
     }
-    if(flag1)
-        flag4 = 0;
     else if(flag3)
         flag2 = 0;
-    if(flag1 || flag2){
+    if(flag1 || flag2) {
         newNode->value = curr2->value;
         curr2 = curr2->next;
     }
-    else if(flag3 || flag4){
+    else {
         newNode->value = curr1->value;
         curr1 = curr1->next;
     }
@@ -173,6 +171,22 @@ void merge(node* curr1, node* curr2, node* prev) {
         prev->next = newNode;
     prev = newNode;
     merge(curr1, curr2, prev); 
+}
+void concatenate() {
+    if(head1==NULL&&head2==NULL)
+        return;
+    node* tmp = head1;
+    if(head1!=NULL)
+    {
+        while(tmp->next!=NULL) {
+            tmp = tmp->next;
+        }
+    }
+    else {
+        head1 = head2;
+        return;
+    }
+    tmp->next = head2;
 }
 void display(node* head) {
     
@@ -199,10 +213,11 @@ void main() {
         printf("Enter 5 to delete at end\n");
         printf("Enter 6 to delete at any index\n");
         printf("Enter 7 to display\n");
-        printf("Enter -1 to continue\n");
+        printf("Enter 8 to concatenate\n");
+        printf("Enter -1 to merge\n");
         printf("Enter your choice : ");
         scanf("%d", &ch);
-        if(ch==-1)break;
+        if(ch==-1 || ch==8)break;
         switch(ch) {
             case 1:
                 printf("Enter 1 for first list 2 for second list : ");
@@ -288,10 +303,16 @@ void main() {
                 else
                     printf("\n\nwrong input\n\n");
                 break;
-                default:
-                    printf("\n\nwrong input\n\n");
+            default:
+                printf("\n\nwrong input\n\n");
         }
 
+    }
+    if(ch==8) {
+        concatenate();
+        printf("\nConcatenated List ");
+        display(head1);
+        return;
     }
     merge(head1, head2, head3);
     printf("\nFirst List : ");
