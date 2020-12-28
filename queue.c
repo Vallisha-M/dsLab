@@ -15,7 +15,7 @@ void enqueue(int x)
         printf("\n\nQueue is Full\n\n");
     else
     {
-        if(front==-1)
+        if(front==-1 && rear==-1)
             front = 0;
         queue[++rear] = x;
         printf("\n\n%d is put in queue\n\n",x);
@@ -25,12 +25,14 @@ void enqueue(int x)
 void dequeue()
 {
     int x;
-    if(rear==-1)
+    if(rear==-1 && front==-1)
         printf("\n\nQueue is empty\n\n");
     else
     {
         x = queue[rear];
-        rear--;
+        front++;
+        if(front==MAX)
+            front=rear=-1;
         printf("\n\n%d was removed from queue\n\n", x);
     }
 }
