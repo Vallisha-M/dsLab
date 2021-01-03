@@ -1,62 +1,109 @@
-#include<stdio.h>
-#include<ctype.h>
-#define SIZE 50
-char stack[SIZE];
+#include <stdio.h>
+#include <conio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+#define MAX 100
+char st[MAX];
 int top=-1;
-push(char elem)
+void push(char st[], char);
+char pop(char st[]);
+
+void InfixtoPostfix(char source[], char target[]);
+int getPriority(char);
+int main()
 {
-stack[++top]=elem;
+    char infix[100], postfix[100];
+    printf("\n Enter any infix expression : ");
+    gets(infix);
+    strcpy(postfix, "");
+    InfixtoPostfix(infix, postfix);
+    printf("\n The corresponding postfix expression is : ");
+    puts(postfix);
+    return 0;
 }
-char pop()
+void InfixtoPostfix(char source[], char target[])
 {
- return(stack[top--]);
- }
- int pr(char symbol)
- {
- if(symbol== '^')
- {
- return(3);
- }
- else if(symbol== '*' || symbol== '/' )
- {
- return(2);
- }
- else if(symbol== '+' || symbol== '-')
- {
- return(1);
- }
- else {
- return(0);
- }
- }
- int main()
- {
- char infix[50],postfix[50],ch,elem;
- int i=0,k=0;
- printf("enter Infix expression : ");
- scanf("%s",infix);
- push('@');
- while((ch=infix[i++])!='\0' )
- {
- if(ch == '(') push(ch);
- else
- if(isalnum(ch)) postfix[k++]=ch;
- else
- if(ch==')')
- { while(stack[top] !='(')
- postfix[k++]=pop();
- elem=pop();
- }
- else
- {
- while(pr(stack[top]) >=pr(ch))
-  postfix[k++]=pop();
-  push(ch);
-  }
-  }
-  while(stack[top]!='@')
-   postfix[k++]=pop();
-   postfix[k]='\0';
-   printf("\nPostfixexpression=%s\n",postfix);
-   return 0;
-   }
+    int i=0, j=0;
+    char temp;
+    strcpy(target, "");
+    while(source[i]!='\0')
+    {
+        if(source[i]=='(')
+        {
+            push(st, source[i]);
+            i++;
+        }
+        else if(source[i] == ')')
+        {
+            while((top!=-1) && (st[top]!='('))
+            {
+                target[j] = pop(st);
+                j = j+1;
+            }
+            if(top==-1)
+            {
+                printf("\n INCORRECT EXPRESSION");
+                exit(1);
+            }
+            temp = pop(st);//remove left parenthesis
+            i = i+1;
+        }
+        else if(isdigit(source[i]) || isalpha(source[i]))
+        {
+            target[j] = source[i];
+            j+=1;
+            i+=1;
+        }
+        else if (source[i] == '+' || source[i] == '-' || source[i] == '*' || source[i] == '/' || source[i] == '%')
+        {
+            while( top!=-1 && (st[top]!= '(') && (getPriority(st[top])> getPriority(source[i])))
+            {
+                target[j] = pop(st);
+                j+=1;
+            }
+            push(st, source[i]);
+            i+=1;
+        }
+        else
+        {
+            printf("\n INCORRECT ELEMENT IN EXPRESSION");
+            exit(1);
+        }
+    }
+    while(top!=-1 && st[top]!='(')
+    {
+        target[j] = pop(st);
+        j+=1;
+    }
+    target[j]='\0';
+}
+int getPriority(char op)
+{
+    if(op=='/' || op == '*' || op=='%')
+        return 1;
+    else if(op=='+' || op=='-')
+        return 0;
+}
+void push(char st[], char val)
+{
+    if(top==MAX-1)
+        printf("\n STACK OVERFLOW");
+    else
+    {
+        top+=1;
+        st[top]=val;
+    }
+}
+char pop(char st[])
+{
+    char val=' ';
+    if(top==-1)
+        printf("\n STACK UNDERFLOW");
+    else
+    {
+        val=st[top];
+        top = top-1;
+    }
+    return val;
+}
