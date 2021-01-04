@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//void count();
+
 void putBeg(int value);
 void put(int pos, int value);
 void putEnd(int value);
@@ -144,7 +144,6 @@ void main() {
     int choice = 0, input, pos;
     while(1)
     {
-        //count();
         printf("Enter 1 to add at beginning\n");
         printf("Enter 2 to add at end\n");
         printf("Enter 3 to add at given index\n");
@@ -192,13 +191,3 @@ void main() {
     }
     printf("\n\n-----DONE-----\n\n");
 }
-/*
-void count() {
-    int i = 0;
-    node* tmp=head;
-    while(tmp!=NULL) {
-        i++;
-        tmp = tmp->next;
-    }
-    printf("\n\nCount : %d\n\n", i);
-}*/
